@@ -9,6 +9,7 @@ import Dashboard from "./views/Dashboard";
 import PenerimaQurban from "./views/PenerimaQurban";
 import PemberiQurban from "./views/PemberiQurban";
 import Kelurahan from "./views/Kelurahan";
+import Laporan from "./views/Laporan";
 
 export default [
   {
@@ -36,5 +37,10 @@ export default [
     path: "/kelurahan",
     layout: DefaultLayout,
     component: Kelurahan
+  },
+  {
+    path: "/laporan",
+    layout: DefaultLayout,
+    component: Laporan
   }
 ];

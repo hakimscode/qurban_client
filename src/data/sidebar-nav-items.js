@@ -20,6 +20,11 @@ export default function() {
       title: "Pemberi Qurban",
       htmlBefore: '<i class="material-icons">view_module</i>',
       to: "/pemberi-qurban"
+    },
+    {
+      title: "Laporan",
+      htmlBefore: '<i class="material-icons">library_books</i>',
+      to: "/laporan"
     }
   ];
 }
