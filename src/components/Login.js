@@ -42,6 +42,7 @@ export class Login extends Component {
       alert(res.data.message);
       if (res.status === 200 && res.data.status && res.data.token) {
         localStorage.setItem("jwt-token", res.data.token);
+        localStorage.setItem("session-qurban", res.data.user.username);
         this.props.history.push("/");
       }
     });

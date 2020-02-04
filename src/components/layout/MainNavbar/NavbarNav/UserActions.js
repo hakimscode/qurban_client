@@ -30,8 +30,13 @@ export default class UserActions extends React.Component {
 
   handleLogout = e => {
     localStorage.removeItem("jwt-token");
+    localStorage.removeItem("session-qurban");
     this.props.history.push("/login");
   };
+
+  viewName = () => {
+    return localStorage.getItem('session-qurban') === "admin" ? "Admin Qurban" : "User Qurban";
+  }
 
   render() {
     return (
@@ -42,7 +47,7 @@ export default class UserActions extends React.Component {
             src={require("./../../../../images/avatars/0.jpg")}
             alt="User Avatar"
           />{" "}
-          <span className="d-none d-md-inline-block">Admin Qurban</span>
+          <span className="d-none d-md-inline-block">{this.viewName()}</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>
           <DropdownItem

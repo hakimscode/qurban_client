@@ -8,16 +8,12 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Button,
-  Form,
-  FormInput,
-  FormSelect,
-  ListGroup,
-  ListGroupItem
+  Button
 } from "shards-react";
 import axios from "axios";
 
 import PageTitle from "../components/common/PageTitle";
+import PenerimaQurbanForm from "./PenerimaQurbanForm";
 
 class PenerimaQurban extends React.Component {
   constructor(props) {
@@ -172,6 +168,56 @@ class PenerimaQurban extends React.Component {
     }
   };
 
+  form = () => {
+    const session_admin = localStorage.getItem("session-qurban");
+    if(session_admin !== "admin"){
+      return "";
+    }
+
+    return <PenerimaQurbanForm 
+            data={this.state}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            cancelClick={this.cancelClick}
+          >
+          </PenerimaQurbanForm>
+  }
+
+  actionData = (id=0, tag='head') => {
+    const session_admin = localStorage.getItem("session-qurban");
+
+    if(session_admin !== "admin"){
+      return ""
+    }
+
+    if(tag === 'head'){
+      return <th scope="col" className="border-0">
+        Controls
+      </th>
+    }else{
+      return <td>
+            <Button
+              size="sm"
+              theme="danger"
+              className="mb-2 mr-1"
+              id_pemberi_qurban={id}
+              onClick={this.hapusClick.bind(this, id)}
+            >
+              Hapus
+            </Button>
+            <Button
+              size="sm"
+              theme="success"
+              className="mb-2 mr-1"
+              id_pemberi_qurban={id}
+              onClick={this.editClick.bind(this, id)}
+            >
+              Edit
+            </Button>
+          </td>
+    }
+  }
+
   render() {
     return (
       <Container fluid className="main-content-container px-4">
@@ -185,117 +231,7 @@ class PenerimaQurban extends React.Component {
           />
         </Row>
 
-        <Row>
-          <Col>
-            <Card small className="mb-4">
-              <CardHeader className="border-bottom">
-                <h6 className="m-0">Form Penerima Qurban</h6>
-              </CardHeader>
-
-              <CardBody className="p-0">
-                <ListGroup flush>
-                  <Form onSubmit={this.handleSubmit}>
-                    <ListGroupItem className="p-3">
-                      <Row>
-                        <Col>
-                          <Row form>
-                            <Col md="6" className="form-group">
-                              <label htmlFor="feInputCity">No KK</label>
-                              <FormInput
-                                id="feInputCity"
-                                placeholder="Input No KK"
-                                name="txt_no_kk"
-                                onChange={this.handleChange}
-                                value={this.state.txt_no_kk}
-                                required
-                              />
-                            </Col>
-                            <Col md="6" className="form-group">
-                              <label htmlFor="feInputCity">Alamat</label>
-                              <FormInput
-                                id="feInputCity"
-                                placeholder="Input Alamat"
-                                name="txt_alamat"
-                                onChange={this.handleChange}
-                                value={this.state.txt_alamat}
-                                required
-                              />
-                            </Col>
-                          </Row>
-                          <Row form>
-                            <Col md="6" className="form-group">
-                              <label htmlFor="feInputCity">Kepala KK</label>
-                              <FormInput
-                                id="feInputCity"
-                                placeholder="Input Kepala KK"
-                                name="txt_kepala_kk"
-                                onChange={this.handleChange}
-                                value={this.state.txt_kepala_kk}
-                                required
-                              />
-                            </Col>
-                            <Col md="6" className="form-group">
-                              <label htmlFor="feInputCity">
-                                Jumlah Anggota
-                              </label>
-                              <FormInput
-                                id="feInputCity"
-                                placeholder="Input Jumlah Anggota"
-                                name="txt_jumlah_anggota"
-                                onChange={this.handleChange}
-                                value={this.state.txt_jumlah_anggota}
-                                required
-                              />
-                            </Col>
-                          </Row>
-                          <Row form>
-                            <Col md="6" className="form-group">
-                              <label htmlFor="feInputCity">Kelurahan</label>
-                              <FormSelect
-                                id="feInputState"
-                                placeholder="Pilih Kelurahan"
-                                name="txt_id_kelurahan"
-                                onChange={this.handleChange}
-                                value={this.state.txt_id_kelurahan}
-                                required
-                              >
-                                <option value="">-- pilih kelurahan --</option>
-                                {this.state.kelurahan.map(row_kel => (
-                                  <option key={row_kel.id} value={row_kel.id}>
-                                    {row_kel.nama_kelurahan}
-                                  </option>
-                                ))}
-                              </FormSelect>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
-                    </ListGroupItem>
-                    <ListGroupItem className="d-flex px-3 border-0">
-                      <Button
-                        outline
-                        theme="accent"
-                        size="sm"
-                        onClick={this.cancelClick}
-                      >
-                        <i className="material-icons">cancel</i> Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        theme="accent"
-                        size="sm"
-                        className="ml-auto"
-                      >
-                        <i className="material-icons">save</i>{" "}
-                        {this.state.value_simpan}
-                      </Button>
-                    </ListGroupItem>
-                  </Form>
-                </ListGroup>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+        {this.form()}
 
         <Row>
           <Col>
@@ -325,9 +261,7 @@ class PenerimaQurban extends React.Component {
                       <th scope="col" className="border-0">
                         Jumlah Anggota
                       </th>
-                      <th scope="col" className="border-0">
-                        Controls
-                      </th>
+                      {this.actionData()}
                     </tr>
                   </thead>
                   <tbody>
@@ -339,26 +273,7 @@ class PenerimaQurban extends React.Component {
                         <td>{row.nama_kelurahan}</td>
                         <td>{row.alamat}</td>
                         <td>{row.jumlah_anggota}</td>
-                        <td>
-                          <Button
-                            size="sm"
-                            theme="danger"
-                            className="mb-2 mr-1"
-                            id_penerima_qurban={row.id}
-                            onClick={this.hapusClick.bind(this, row.id)}
-                          >
-                            Hapus
-                          </Button>
-                          <Button
-                            size="sm"
-                            theme="success"
-                            className="mb-2 mr-1"
-                            id_penerima_qurban={row.id}
-                            onClick={this.editClick.bind(this, row.id)}
-                          >
-                            Edit
-                          </Button>
-                        </td>
+                        {this.actionData(row.id, 'body')}
                       </tr>
                     ))}
                   </tbody>
