@@ -5,11 +5,14 @@ import Axios from "axios";
 export class AuthenticatedComponent extends Component {
   constructor() {
     super();
+    // this.API_URL = "http://http://qurban.local/api/get_user_by_token";
+    this.API_URL = "https://api.fawwazlab.com/qurban/api/get_user_by_token";
     this.state = {
       user: {
         id: "",
         nama_lengkap: "",
-        username: ""
+        username: "",
+        jenis_user: ""
       },
       username: null,
       password: null
@@ -22,7 +25,7 @@ export class AuthenticatedComponent extends Component {
       this.props.history.push("/login");
     } else {
       Axios.get(
-        "https://api.fawwazlab.com/qurban/api/get_user_by_token/" + jwt
+        this.API_URL + "/" + jwt
       ).then(res => {
         this.setState({ user: res.data });
         // console.log(this.state.user);

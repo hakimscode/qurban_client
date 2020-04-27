@@ -18,6 +18,9 @@ export class Login extends Component {
   constructor() {
     super();
 
+    // this.API_URL = "http://qurban.local/api/login";
+    this.API_URL = "https://api.fawwazlab.com/qurban/api/login";
+
     this.state = {
       txt_username: "",
       txt_password: ""
@@ -35,14 +38,16 @@ export class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    Axios.post("https://api.fawwazlab.com/qurban/api/login", {
+    Axios.post(this.API_URL, {
       username: this.state.txt_username,
       password: this.state.txt_password
     }).then(res => {
       alert(res.data.message);
       if (res.status === 200 && res.data.status && res.data.token) {
         localStorage.setItem("jwt-token", res.data.token);
-        localStorage.setItem("session-qurban", res.data.user.username);
+        localStorage.setItem("session-qurban", res.data.user.jenis_user);
+        localStorage.setItem("session-name", res.data.user.nama_lengkap);
+        localStorage.setItem("id-kelurahan", res.data.user.id_kelurahan);
         this.props.history.push("/");
       }
     });

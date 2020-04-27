@@ -16,6 +16,36 @@ class SidebarNavItems extends React.Component {
   }
 
   componentWillMount() {
+    const sideMenu = [
+      {
+        title: "User Kelurahan",
+        htmlBefore: '<i class="material-icons">person</i>',
+        to: "/user-kelurahan"  
+      },
+      {
+        title: "Ganti Password",
+        htmlBefore: '<i class="material-icons">vpn_key</i>',
+        to: "/ganti-password"
+      }
+    ];
+
+    if(localStorage.getItem("session-qurban") === 'kecamatan'){
+      this.setState({navItems: this.state.navItems.concat(sideMenu)})
+    }
+    if(localStorage.getItem("session-qurban") === 'kelurahan'){
+      this.setState(
+        {
+          navItems: [...this.state.navItems, 
+            {
+              title: "Ganti Password",
+              htmlBefore: '<i class="material-icons">vpn_key</i>',
+              to: "/ganti-password"
+            }
+          ]
+        }
+      )
+    }
+
     Store.addChangeListener(this.onChange);
   }
 

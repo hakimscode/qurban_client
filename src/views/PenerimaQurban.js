@@ -19,7 +19,14 @@ class PenerimaQurban extends React.Component {
   constructor(props) {
     super(props);
 
+    // this.URL_KUPON = "http://localhost:3000/kupon.html";
+    this.URL_KUPON = "http://fawwazlab.com/qurbanclient/kupon.html";
+
+    // this.API_URL = "http://qurban.local/api/penerima_qurban";
     this.API_URL = "https://api.fawwazlab.com/qurban/api/penerima_qurban";
+
+    // this.API_URL_KEL = "http://qurban.local/api/kelurahan";
+    this.API_URL_KEL = "https://api.fawwazlab.com/qurban/api/kelurahan";
 
     this.state = {
       penerima_qurban: [
@@ -61,7 +68,7 @@ class PenerimaQurban extends React.Component {
       this.setState({ penerima_qurban: res.data });
     });
 
-    axios.get("https://api.fawwazlab.com/qurban/api/kelurahan").then(res => {
+    axios.get(this.API_URL_KEL).then(res => {
       this.setState({ kelurahan: res.data });
     });
   }
@@ -169,8 +176,8 @@ class PenerimaQurban extends React.Component {
   };
 
   form = () => {
-    const session_admin = localStorage.getItem("session-qurban");
-    if(session_admin !== "admin"){
+    const session_qurban = localStorage.getItem("session-qurban");
+    if(session_qurban === "umum"){
       return "";
     }
 
@@ -183,18 +190,37 @@ class PenerimaQurban extends React.Component {
           </PenerimaQurbanForm>
   }
 
-  actionData = (id=0, tag='head') => {
-    const session_admin = localStorage.getItem("session-qurban");
+  kupon = (row) => {
+    const session_qurban = localStorage.getItem("session-qurban");
+    const id_kelurahan = localStorage.getItem("id-kelurahan");
 
-    if(session_admin !== "admin"){
-      return ""
+    if(session_qurban === "kelurahan" && row.id_kelurahan == parseInt(id_kelurahan)){
+      const url = `${this.URL_KUPON}?kelurahan=${row.nama_kelurahan}&no_kk_penerima=${row.no_kk}&nama_penerima=${row.kepala_kk}`;
+      return <td>
+          <a href={url}
+            target="_blank"
+            title="Klik untuk mencetak Kupon"
+          >
+            {row.no_kk}
+          </a>
+        </td>
     }
+    
+    return <td>{row.no_kk}</td>
+  }
+
+  actionData = (id=0, id_kel=0, tag='head') => {
+    const session_qurban = localStorage.getItem("session-qurban");
+    const id_kelurahan = localStorage.getItem("id-kelurahan");
 
     if(tag === 'head'){
+      if(session_qurban === "umum") return "";
       return <th scope="col" className="border-0">
         Controls
       </th>
     }else{
+      if(session_qurban === "umum") return "";
+      if(session_qurban === "kelurahan" && id_kel != parseInt(id_kelurahan)) return <td></td>;
       return <td>
             <Button
               size="sm"
@@ -268,12 +294,12 @@ class PenerimaQurban extends React.Component {
                     {this.state.penerima_qurban.map((row, index) => (
                       <tr key={row.id}>
                         <td>{index + 1}</td>
-                        <td>{row.no_kk}</td>
+                        {this.kupon(row)}
                         <td>{row.kepala_kk}</td>
                         <td>{row.nama_kelurahan}</td>
                         <td>{row.alamat}</td>
                         <td>{row.jumlah_anggota}</td>
-                        {this.actionData(row.id, 'body')}
+                        {this.actionData(row.id, row.id_kelurahan, 'body')}
                       </tr>
                     ))}
                   </tbody>

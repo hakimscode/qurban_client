@@ -9,6 +9,8 @@ import Dashboard from "./views/Dashboard";
 import PenerimaQurban from "./views/PenerimaQurban";
 import PemberiQurban from "./views/PemberiQurban";
 import Kelurahan from "./views/Kelurahan";
+import UserKelurahan from "./views/UserKelurahan";
+import GantiPassword from "./views/GantiPassword";
 import Laporan from "./views/Laporan";
 
 export default [
@@ -37,6 +39,16 @@ export default [
     path: "/kelurahan",
     layout: DefaultLayout,
     component: Kelurahan
+  },
+  {
+    path: "/user-kelurahan",
+    layout: DefaultLayout,
+    component: UserKelurahan
+  },
+  {
+    path: "/ganti-password",
+    layout: DefaultLayout,
+    component: GantiPassword
   },
   {
     path: "/laporan",

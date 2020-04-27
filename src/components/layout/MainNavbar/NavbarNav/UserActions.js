@@ -31,11 +31,13 @@ export default class UserActions extends React.Component {
   handleLogout = e => {
     localStorage.removeItem("jwt-token");
     localStorage.removeItem("session-qurban");
+    localStorage.removeItem("session-name");
+    localStorage.removeItem("id-kelurahan");
     this.props.history.push("/login");
   };
 
   viewName = () => {
-    return localStorage.getItem('session-qurban') === "admin" ? "Admin Qurban" : "User Qurban";
+    return localStorage.getItem('session-name');
   }
 
   render() {

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupon</title>
+</head>
+<body>
+    <center>
+        <table width="600px" border="1" cellpadding="10">
+            <tr align="center">
+                <td colspan="2"><b>KUPON</b></td>
+            </tr>
+            <tr>
+                <td width="50%">Kelurahan</td>
+                <td id="kelurahan"></td>
+            </tr>
+            <tr>
+                <td width="50%">No KK Penerima</td>
+                <td id="no_kk_penerima"></td>
+            </tr>
+            <tr>
+                <td width="50%">Kepala KK Penerima</td>
+                <td id="nama_penerima"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">Tanggal : </td>
+                            <td width="50%" align="center">Mengetahui</td>
+                        </tr>
+                        <tr><td colspan="2">&nbsp;</td></tr>
+                        <tr><td colspan="2">&nbsp;</td></tr>
+                        <tr><td colspan="2">&nbsp;</td></tr>
+                        <tr><td colspan="2">&nbsp;</td></tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td width="50%">Kepala Lurah : (......................................)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </center>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        document.getElementById("kelurahan").innerHTML = urlParams.get('kelurahan');
+        document.getElementById("no_kk_penerima").innerHTML = urlParams.get('no_kk_penerima');
+        document.getElementById("nama_penerima").innerHTML = urlParams.get('nama_penerima');
+    </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 export default function() {
-  return [
+  const menus = [
     {
       title: "Dashboard",
       to: "/dashboard",
@@ -27,4 +27,5 @@ export default function() {
       to: "/laporan"
     }
   ];
+  return menus;
 }

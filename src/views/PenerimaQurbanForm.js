@@ -12,8 +12,61 @@ import {
     ListGroup,
     ListGroupItem
   } from "shards-react";
+import axios from "axios";
 
 class PenerimaQurbanForm extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      kelurahan: {
+        id_kelurahan: "",
+        nama_kelurahan: ""
+      }
+    }
+    const id_kelurahan = localStorage.getItem("id-kelurahan");
+    this.API_URL_KEL_BY_ID = "https://api.fawwazlab.com/qurban/api/kelurahan/" + id_kelurahan;
+    // this.API_URL_KEL_BY_ID = "http://qurban.local/api/kelurahan/" + id_kelurahan;
+  }
+
+  componentDidMount() {
+    axios.get(this.API_URL_KEL_BY_ID).then(res => {
+      this.setState({kelurahan: res.data})
+      this.props.data.txt_id_kelurahan = res.data.id
+    })
+  }
+
+  selectKelurahan = () => {
+    const session_qurban = localStorage.getItem("session-qurban");
+    if(this.id_kelurahan !== 0 && session_qurban === 'kelurahan'){
+      return <FormSelect
+        id="feInputState"
+        placeholder="Pilih Kelurahan"
+        name="txt_id_kelurahan"
+        onChange={this.props.handleChange}
+        value={this.props.data.txt_id_kelurahan}
+        required
+        disabled
+      >
+        <option value={this.state.kelurahan.id_kelurahan}>{this.state.kelurahan.nama_kelurahan}</option>
+      </FormSelect>
+    }
+
+    return <FormSelect
+      id="feInputState"
+      placeholder="Pilih Kelurahan"
+      name="txt_id_kelurahan"
+      onChange={this.props.handleChange}
+      value={this.props.data.txt_id_kelurahan}
+      required
+    >
+      <option value="">-- pilih kelurahan --</option>
+      {this.props.data.kelurahan.map(row_kel => (
+        <option key={row_kel.id} value={row_kel.id}>
+          {row_kel.nama_kelurahan}
+        </option>
+      ))}
+    </FormSelect>
+  }
     render(){
         return <Row>
         <Col>
@@ -81,21 +134,7 @@ class PenerimaQurbanForm extends React.Component{
                         <Row form>
                           <Col md="6" className="form-group">
                             <label htmlFor="feInputCity">Kelurahan</label>
-                            <FormSelect
-                              id="feInputState"
-                              placeholder="Pilih Kelurahan"
-                              name="txt_id_kelurahan"
-                              onChange={this.props.handleChange}
-                              value={this.props.data.txt_id_kelurahan}
-                              required
-                            >
-                              <option value="">-- pilih kelurahan --</option>
-                              {this.props.data.kelurahan.map(row_kel => (
-                                <option key={row_kel.id} value={row_kel.id}>
-                                  {row_kel.nama_kelurahan}
-                                </option>
-                              ))}
-                            </FormSelect>
+                            {this.selectKelurahan()}
                           </Col>
                         </Row>
                       </Col>

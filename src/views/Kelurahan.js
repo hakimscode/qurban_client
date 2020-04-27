@@ -19,17 +19,21 @@ class Kelurahan extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.API_URL = "http://localhost/laravel/sistem_qurban/api/kelurahan";
+    // this.API_URL = "http://qurban.local/api/kelurahan";
     this.API_URL = "https://api.fawwazlab.com/qurban/api/kelurahan";
 
     this.state = {
       kelurahan: [
         {
           id: "",
-          nama_kelurahan: ""
+          nama_kelurahan: "",
+          user_kelurahan: "",
+          pass_kelurahan: "",
         }
       ],
       tmp_nama_kelurahan: "",
+      tmp_user_kelurahan: "",
+      tmp_pass_kelurahan: "",
       tmp_id: "",
 
       value_simpan: "Simpan"
@@ -125,7 +129,7 @@ class Kelurahan extends React.Component {
 
   form = () => {
     const session_admin = localStorage.getItem("session-qurban");
-    if(session_admin !== "admin"){
+    if(session_admin !== "kecamatan"){
       return "";
     }
 
@@ -141,7 +145,7 @@ class Kelurahan extends React.Component {
   actionData = (id=0, tag='head') => {
     const session_admin = localStorage.getItem("session-qurban");
 
-    if(session_admin !== "admin"){
+    if(session_admin !== "kecamatan"){
       return ""
     }
 

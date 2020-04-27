@@ -19,7 +19,11 @@ class PemberiQurban extends React.Component {
   constructor(props) {
     super(props);
 
+    // this.API_URL = "http://qurban.local/api/pemberi_qurban";
     this.API_URL = "https://api.fawwazlab.com/qurban/api/pemberi_qurban";
+
+    // this.API_URL_KEL = "http://qurban.local/api/kelurahan";
+    this.API_URL_KEL = "https://api.fawwazlab.com/qurban/api/kelurahan";
 
     this.state = {
       pemberi_qurban: [
@@ -63,7 +67,7 @@ class PemberiQurban extends React.Component {
       this.setState({ pemberi_qurban: res.data });
     });
 
-    axios.get("https://api.fawwazlab.com/qurban/api/kelurahan").then(res => {
+    axios.get(this.API_URL_KEL).then(res => {
       this.setState({ kelurahan: res.data });
     });
   }
@@ -176,8 +180,8 @@ class PemberiQurban extends React.Component {
   };
 
   form = () => {
-    const session_admin = localStorage.getItem("session-qurban");
-    if(session_admin !== "admin"){
+    const session_qurban = localStorage.getItem("session-qurban");
+    if(session_qurban === "umum"){
       return "";
     }
 
@@ -190,18 +194,18 @@ class PemberiQurban extends React.Component {
           </PemberiQurbanForm>
   }
 
-  actionData = (id=0, tag='head') => {
-    const session_admin = localStorage.getItem("session-qurban");
-
-    if(session_admin !== "admin"){
-      return ""
-    }
+  actionData = (id=0, id_kel=0, tag='head') => {
+    const session_qurban = localStorage.getItem("session-qurban");
+    const id_kelurahan = localStorage.getItem("id-kelurahan");
 
     if(tag === 'head'){
+      if(session_qurban === "umum") return "";
       return <th scope="col" className="border-0">
         Controls
       </th>
     }else{
+      if(session_qurban === "umum") return "";
+      if(session_qurban === "kelurahan" && id_kel != parseInt(id_kelurahan)) return <td></td>;
       return <td>
             <Button
               size="sm"
@@ -284,7 +288,7 @@ class PemberiQurban extends React.Component {
                         <td>{row.nama_kelurahan}</td>
                         <td>{row.jumlah_qurban}</td>
                         <td>{row.keterangan}</td>
-                        {this.actionData(row.id, 'body')}
+                        {this.actionData(row.id, row.id_kelurahan, 'body')}
                       </tr>
                     ))}
                   </tbody>

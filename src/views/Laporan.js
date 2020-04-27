@@ -24,7 +24,11 @@ class Laporan extends React.Component {
     constructor(props) {
         super(props);
         
+        // this.API_URL = "http://qurban.local/api/laporan";
         this.API_URL = "https://api.fawwazlab.com/qurban/api/laporan";
+
+        // this.API_URL_KEL = "http://qurban.local/api/kelurahan";
+        this.API_URL_KEL = "https://api.fawwazlab.com/qurban/api/kelurahan";
 
         this.state = {
 
@@ -51,7 +55,7 @@ class Laporan extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("https://api.fawwazlab.com/qurban/api/kelurahan").then(res => {
+        axios.get(this.API_URL_KEL).then(res => {
             this.setState({ kelurahan: res.data });
         });
     }
