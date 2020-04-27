@@ -5,8 +5,7 @@ import Axios from "axios";
 export class AuthenticatedComponent extends Component {
   constructor() {
     super();
-    // this.API_URL = "http://http://qurban.local/api/get_user_by_token";
-    this.API_URL = "https://api.fawwazlab.com/qurban/api/get_user_by_token";
+    this.API_URL = process.env.REACT_APP_API_URL + "/get_user_by_token";
     this.state = {
       user: {
         id: "",

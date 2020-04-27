@@ -19,8 +19,7 @@ class Kelurahan extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.API_URL = "http://qurban.local/api/kelurahan";
-    this.API_URL = "https://api.fawwazlab.com/qurban/api/kelurahan";
+    this.API_URL = process.env.REACT_APP_API_URL + "/kelurahan";
 
     this.state = {
       kelurahan: [

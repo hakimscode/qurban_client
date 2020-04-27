@@ -34,6 +34,9 @@ class LaporanPenerimaQurban extends React.Component{
                                 Kelurahan
                             </th>
                             <th scope="col" className="border-0">
+                                Tahun
+                            </th>
+                            <th scope="col" className="border-0">
                                 Alamat
                             </th>
                             <th scope="col" className="border-0">
@@ -48,6 +51,7 @@ class LaporanPenerimaQurban extends React.Component{
                                 <td>{row.no_kk}</td>
                                 <td>{row.kepala_kk}</td>
                                 <td>{row.nama_kelurahan}</td>
+                                <td>{row.tahun}</td>
                                 <td>{row.alamat}</td>
                                 <td>{row.jumlah_anggota}</td>
                             </tr>

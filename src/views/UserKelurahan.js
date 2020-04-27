@@ -23,11 +23,8 @@ class UserKelurahan extends React.Component {
   constructor(state) {
     super(state);
 
-    // this.API_URL = "http://qurban.local/api/user_kelurahan";
-    this.API_URL = "https://api.fawwazlab.com/qurban/api/user_kelurahan";
-
-    // this.API_URL_KEL = "http://qurban.local/api/kelurahan";
-    this.API_URL_KEL = "https://api.fawwazlab.com/qurban/api/kelurahan";
+    this.API_URL = process.env.REACT_APP_API_URL + "/user_kelurahan";
+    this.API_URL_KEL = process.env.REACT_APP_API_URL + "/kelurahan";
 
     this.state = {
       user_kelurahan: [

@@ -18,8 +18,7 @@ export class Login extends Component {
   constructor() {
     super();
 
-    // this.API_URL = "http://qurban.local/api/login";
-    this.API_URL = "https://api.fawwazlab.com/qurban/api/login";
+    this.API_URL = process.env.REACT_APP_API_URL + "/login";
 
     this.state = {
       txt_username: "",

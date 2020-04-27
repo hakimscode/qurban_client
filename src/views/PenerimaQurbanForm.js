@@ -24,8 +24,7 @@ class PenerimaQurbanForm extends React.Component{
       }
     }
     const id_kelurahan = localStorage.getItem("id-kelurahan");
-    this.API_URL_KEL_BY_ID = "https://api.fawwazlab.com/qurban/api/kelurahan/" + id_kelurahan;
-    // this.API_URL_KEL_BY_ID = "http://qurban.local/api/kelurahan/" + id_kelurahan;
+    this.API_URL_KEL_BY_ID = process.env.REACT_APP_API_URL + "/kelurahan/" + id_kelurahan;
   }
 
   componentDidMount() {
@@ -133,8 +132,23 @@ class PenerimaQurbanForm extends React.Component{
                         </Row>
                         <Row form>
                           <Col md="6" className="form-group">
-                            <label htmlFor="feInputCity">Kelurahan</label>
-                            {this.selectKelurahan()}
+                            <Row form>
+                              <Col md="6" className="form-group">
+                                <label htmlFor="feInputCity">Kelurahan</label>
+                                {this.selectKelurahan()}
+                              </Col>
+                              <Col md="6" className="form-group">
+                                <label htmlFor="feInputCity">Tahun</label>
+                                <FormInput
+                                  id="feInputCity"
+                                  placeholder="Input Tahun Qurban"
+                                  name="txt_tahun"
+                                  onChange={this.props.handleChange}
+                                  value={this.props.data.txt_tahun}
+                                  required
+                                />
+                              </Col>
+                            </Row>
                           </Col>
                         </Row>
                       </Col>

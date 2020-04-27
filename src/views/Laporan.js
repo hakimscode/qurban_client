@@ -24,11 +24,8 @@ class Laporan extends React.Component {
     constructor(props) {
         super(props);
         
-        // this.API_URL = "http://qurban.local/api/laporan";
-        this.API_URL = "https://api.fawwazlab.com/qurban/api/laporan";
-
-        // this.API_URL_KEL = "http://qurban.local/api/kelurahan";
-        this.API_URL_KEL = "https://api.fawwazlab.com/qurban/api/kelurahan";
+        this.API_URL = process.env.REACT_APP_API_URL + "/laporan";
+        this.API_URL_KEL = process.env.REACT_APP_API_URL + "/kelurahan";
 
         this.state = {
 
@@ -43,8 +40,7 @@ class Laporan extends React.Component {
 
             txt_laporan: "pemberi_qurban",
             txt_id_kelurahan: "all_kelurahan",
-            txt_tanggal_awal: "",
-            txt_tanggal_akhir: "",
+            txt_tahun_qurban: "",
             disabled: true,
             chk_all_periode: true,
             tables: PemberiQurban,
@@ -76,24 +72,17 @@ class Laporan extends React.Component {
         this.setState({
             [e.target.name]: e.target.checked,
             disabled: dis,
-            txt_tanggal_awal: "",
-            txt_tanggal_akhir: "",
+            txt_tahun_qurban: ""
         });  
     };
     
     handleSubmit = e => {
         e.preventDefault();
         let kelurahan = this.txt_id_kelurahan === "" ? "all_kelurahan" : this.state.txt_id_kelurahan;
-        let tanggal_awal = this.state.disabled ? "all_tanggal" : this.state.txt_tanggal_awal;
-        let tanggal_akhir = this.state.disabled ? "all_tanggal" : this.state.txt_tanggal_akhir;
+        let tahun_qurban = this.state.disabled ? "all_tahun" : this.state.txt_tahun_qurban;
 
-        if(!this.state.disabled && (tanggal_awal === "" || tanggal_akhir === "")){
-            alert('Periode awal dan akhir harus diisi');
-            return false;
-        }
-
-        if(!this.state.disabled && (isNaN(Date.parse(tanggal_awal)) || isNaN(Date.parse(tanggal_akhir)))){
-            alert('Format tanggal salah !');
+        if(!this.state.disabled && (tahun_qurban === "")){
+            alert('Tahun Qurban harus diisi!');
             return false;
         }
 
@@ -101,8 +90,7 @@ class Laporan extends React.Component {
         .post(this.API_URL, {
             laporan: this.state.txt_laporan,
             id_kelurahan: kelurahan,
-            tanggal_awal: tanggal_awal,
-            tanggal_akhir: tanggal_akhir,
+            tahun_qurban: tahun_qurban,
         })
         .then(res => {
             if (res.status === 200) {
@@ -182,34 +170,23 @@ class Laporan extends React.Component {
                                                     </Row>
                                                     <Row form>
                                                         <Col md="3" className="form-group">
-                                                            <label htmlFor="feInputCity">Periode Awal</label>
+                                                            <label htmlFor="feInputCity">Tahun Qurban</label>
                                                             <FormInput
                                                                 id="feInputCity"
-                                                                placeholder="(yyyy-mm-dd) ex: 2020-01-20"
-                                                                name="txt_tanggal_awal"
+                                                                placeholder="Input Tahun Qurban"
+                                                                name="txt_tahun_qurban"
                                                                 onChange={this.handleChange}
-                                                                value={this.state.txt_tanggal_awal}
+                                                                value={this.state.txt_tahun_qurban}
                                                                 disabled = {this.state.disabled}
                                                             />
                                                         </Col>
                                                         <Col md="3" className="form-group">
-                                                        <label htmlFor="feInputCity">Periode Akhir</label>
-                                                            <FormInput
-                                                                id="feInputCity"
-                                                                placeholder="(yyyy-mm-dd) ex: 2020-01-20"
-                                                                name="txt_tanggal_akhir"
-                                                                onChange={this.handleChange}
-                                                                value={this.state.txt_tanggal_akhir}
-                                                                disabled = {this.state.disabled}
-                                                            />
-                                                        </Col>
-                                                        <Col md="3" className="form-group">
-                                                        <label htmlFor="feInputCity">Seluruh Periode</label>
+                                                        <label htmlFor="feInputCity">Periode Qurban</label>
                                                             <FormCheckbox
                                                                 onChange={this.clickCheck}
                                                                 name="chk_all_periode"
                                                                 checked={this.state.chk_all_periode}
-                                                            >Seluruh Periode Laporan</FormCheckbox>
+                                                            >Seluruh Periode Qurban</FormCheckbox>
                                                         </Col>
                                                     </Row>
                                                     <Row>

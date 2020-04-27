@@ -22,8 +22,7 @@ class GantiPassword extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.API_URL = "http://qurban.local/api/ganti_password";
-    this.API_URL = "https://api.fawwazlab.com/qurban/api/ganti_password";
+    this.API_URL = process.env.REACT_APP_API_URL + "/ganti_password";
 
     this.state = {
       tmp_old_password: "",

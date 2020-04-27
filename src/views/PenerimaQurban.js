@@ -19,14 +19,9 @@ class PenerimaQurban extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.URL_KUPON = "http://localhost:3000/kupon.html";
-    this.URL_KUPON = "http://fawwazlab.com/qurbanclient/kupon.html";
-
-    // this.API_URL = "http://qurban.local/api/penerima_qurban";
-    this.API_URL = "https://api.fawwazlab.com/qurban/api/penerima_qurban";
-
-    // this.API_URL_KEL = "http://qurban.local/api/kelurahan";
-    this.API_URL_KEL = "https://api.fawwazlab.com/qurban/api/kelurahan";
+    this.URL_KUPON = process.env.REACT_APP_BASE_URL + "/kupon.html";
+    this.API_URL = process.env.REACT_APP_API_URL + "/penerima_qurban";
+    this.API_URL_KEL = process.env.REACT_APP_API_URL + "/kelurahan";
 
     this.state = {
       penerima_qurban: [
@@ -37,7 +32,8 @@ class PenerimaQurban extends React.Component {
           id_kelurahan: "",
           nama_kelurahan: "",
           alamat: "",
-          jumlah_anggota: ""
+          jumlah_anggota: "",
+          tahun: "",
         }
       ],
 
@@ -53,6 +49,7 @@ class PenerimaQurban extends React.Component {
       txt_id_kelurahan: "",
       txt_alamat: "",
       txt_jumlah_anggota: "",
+      txt_tahun: "",
       txt_id: "",
 
       value_simpan: "Simpan"
@@ -88,6 +85,7 @@ class PenerimaQurban extends React.Component {
         txt_id_kelurahan: res.data.id_kelurahan,
         txt_alamat: res.data.alamat,
         txt_jumlah_anggota: res.data.jumlah_anggota,
+        txt_tahun: res.data.tahun,
         value_simpan: "Edit"
       });
     });
@@ -115,6 +113,7 @@ class PenerimaQurban extends React.Component {
       txt_id_kelurahan: "",
       txt_alamat: "",
       txt_jumlah_anggota: "",
+      txt_tahun: "",
       value_simpan: "Simpan"
     });
   };
@@ -130,7 +129,8 @@ class PenerimaQurban extends React.Component {
           kepala_kk: this.state.txt_kepala_kk,
           id_kelurahan: this.state.txt_id_kelurahan,
           alamat: this.state.txt_alamat,
-          jumlah_anggota: this.state.txt_jumlah_anggota
+          jumlah_anggota: this.state.txt_jumlah_anggota,
+          tahun: this.state.txt_tahun
         })
         .then(res => {
           if (res.status === 200) {
@@ -150,7 +150,8 @@ class PenerimaQurban extends React.Component {
           kepala_kk: this.state.txt_kepala_kk,
           id_kelurahan: this.state.txt_id_kelurahan,
           alamat: this.state.txt_alamat,
-          jumlah_anggota: this.state.txt_jumlah_anggota
+          jumlah_anggota: this.state.txt_jumlah_anggota,
+          tahun: this.state.txt_tahun
         })
         .then(res => {
           if (res.status === 200) {
@@ -282,6 +283,9 @@ class PenerimaQurban extends React.Component {
                         Kelurahan
                       </th>
                       <th scope="col" className="border-0">
+                        Tahun
+                      </th>
+                      <th scope="col" className="border-0">
                         Alamat
                       </th>
                       <th scope="col" className="border-0">
@@ -297,6 +301,7 @@ class PenerimaQurban extends React.Component {
                         {this.kupon(row)}
                         <td>{row.kepala_kk}</td>
                         <td>{row.nama_kelurahan}</td>
+                        <td>{row.tahun}</td>
                         <td>{row.alamat}</td>
                         <td>{row.jumlah_anggota}</td>
                         {this.actionData(row.id, row.id_kelurahan, 'body')}
