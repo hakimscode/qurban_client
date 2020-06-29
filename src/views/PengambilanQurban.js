@@ -112,38 +112,36 @@ class PengambilanQurban extends React.Component {
                             </CardHeader>
                             <CardBody className="p-0">
                                 <ListGroup flush>
-                                    <Form>
-                                        <ListGroupItem className="p-3">
-                                            <Row>
-                                                <Col>
-                                                    <Row form>
-                                                    <Col className="form-group">
-                                                        <label htmlFor="feInputCity">No Kupon</label>
-                                                        <FormInput
-                                                        id="feInputCity"
-                                                        placeholder="Input No Kupon"
-                                                        name="txt_no_kupon"
-                                                        onChange={this.handleChange.bind()}
-                                                        value={this.state.txt_no_kupon}
-                                                        required
-                                                        />
-                                                    </Col>
-                                                    </Row>
+                                    <ListGroupItem className="p-3">
+                                        <Row>
+                                            <Col>
+                                                <Row form>
+                                                <Col className="form-group">
+                                                    <label htmlFor="feInputCity">No Kupon</label>
+                                                    <FormInput
+                                                    id="feInputCity"
+                                                    placeholder="Input No Kupon"
+                                                    name="txt_no_kupon"
+                                                    onChange={this.handleChange.bind()}
+                                                    value={this.state.txt_no_kupon}
+                                                    required
+                                                    />
                                                 </Col>
-                                            </Row>
-                                        </ListGroupItem>
-                                        <ListGroupItem className="d-flex px-3 border-0">
-                                            <Button
-                                            theme="accent"
-                                            size="sm"
-                                            className="ml-auto"
-                                            onClick={this.cekKupon.bind()}
-                                            >
-                                            <i className="material-icons">search</i>{" "}
-                                            Cek Kupon
-                                            </Button>
-                                        </ListGroupItem>
-                                    </Form>
+                                                </Row>
+                                            </Col>
+                                        </Row>
+                                    </ListGroupItem>
+                                    <ListGroupItem className="d-flex px-3 border-0">
+                                        <Button
+                                        theme="accent"
+                                        size="sm"
+                                        className="ml-auto"
+                                        onClick={this.cekKupon.bind()}
+                                        >
+                                        <i className="material-icons">search</i>{" "}
+                                        Cek Kupon
+                                        </Button>
+                                    </ListGroupItem>
                                 </ListGroup>
                             </CardBody>
                         </Card>
