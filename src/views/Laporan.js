@@ -19,6 +19,7 @@ import axios from "axios";
 
 import PemberiQurban from "../views/LaporanPemberiQurban";
 import PenerimaQurban from "../views/LaporanPenerimaQurban";
+import ReactToPrint from "react-to-print";
 
 class Laporan extends React.Component {
     constructor(props) {
@@ -105,9 +106,9 @@ class Laporan extends React.Component {
 
     dataTable = () => {
         if(this.state.txt_laporan === "pemberi_qurban"){
-            return <PemberiQurban data={this.state.data}></PemberiQurban>
+            return <PemberiQurban data={this.state.data} ref={el => (this.componentRef = el)}></PemberiQurban>
         }else{
-            return <PenerimaQurban data={this.state.data}></PenerimaQurban>;
+            return <PenerimaQurban data={this.state.data} ref={el => (this.componentRef = el)}></PenerimaQurban>;
         }
     }
 
@@ -189,22 +190,33 @@ class Laporan extends React.Component {
                                                             >Seluruh Periode Qurban</FormCheckbox>
                                                         </Col>
                                                     </Row>
-                                                    <Row>
-                                                        <Col md="3" className="form-group">
-                                                            <Button
-                                                                type="submit"
-                                                                theme="accent"
+                                                </Col>
+                                            </Row>
+                                        </ListGroupItem>
+                                        <ListGroupItem className="d-flex px-3 border-0">
+                                            <Button
+                                                type="submit"
+                                                theme="accent"
+                                                size="sm"
+                                            >
+                                                <i className="material-icons">assignment_turned_in</i>{" "}
+                                                Proses
+                                            </Button>
+                                            <ReactToPrint
+                                                trigger={() => {
+                                                    return <Button
+                                                                outline
+                                                                theme="secondary"
                                                                 size="md"
                                                                 className="ml-auto"
                                                                 alignContent="center"
                                                             >
-                                                                <i className="material-icons">save</i>{" "}
-                                                                Proses
-                                                            </Button>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-                                            </Row>
+                                                                <i className="material-icons">print</i>{" "}
+                                                                Print
+                                                            </Button>;
+                                                }}
+                                                content={() => this.componentRef}
+                                            />
                                         </ListGroupItem>
                                     </Form>
                                 </ListGroup>

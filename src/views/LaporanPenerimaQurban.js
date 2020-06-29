@@ -15,7 +15,7 @@ class LaporanPenerimaQurban extends React.Component{
                 <Col>
                     <Card small className="mb-4">
                     <CardHeader className="border-bottom">
-                        <h6 className="m-0">Data Penerima Qurban</h6>
+                        <h4 className="m-6 text-center">Data Penerima Qurban</h4>
                     </CardHeader>
                     <CardBody className="p-0 pb-3">
                         <table className="table mb-0">
