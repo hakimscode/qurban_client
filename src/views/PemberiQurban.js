@@ -48,7 +48,7 @@ class PemberiQurban extends React.Component {
       txt_nama: "",
       txt_alamat: "",
       txt_id_kelurahan: "",
-      txt_jumlah_qurban: "",
+      txt_jumlah_qurban: 0,
       txt_keterangan: "",
       txt_tahun: "",
       txt_id: "",
@@ -276,9 +276,9 @@ class PemberiQurban extends React.Component {
                       <th scope="col" className="border-0">
                         Tahun
                       </th>
-                      <th scope="col" className="border-0">
+                      {/* <th scope="col" className="border-0">
                         Jumlah Qurban (kg)
-                      </th>
+                      </th> */}
                       <th scope="col" className="border-0">
                         Keterangan
                       </th>
@@ -294,7 +294,7 @@ class PemberiQurban extends React.Component {
                         <td>{row.alamat}</td>
                         <td>{row.nama_kelurahan}</td>
                         <td>{row.tahun}</td>
-                        <td>{row.jumlah_qurban}</td>
+                        {/* <td>{row.jumlah_qurban}</td> */}
                         <td>{row.keterangan}</td>
                         {this.actionData(row.id, row.id_kelurahan, 'body')}
                       </tr>

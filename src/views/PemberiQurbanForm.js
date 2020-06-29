@@ -140,12 +140,13 @@ class PemberiQurbanForm extends React.Component{
                             </Col>
                           </Row>
                           <Row form>
-                            <Col md="6" className="form-group">
+                            <Col md="6" className="form-group" hidden>
                               <label htmlFor="feInputCity">
                                 Jumlah Qurban (kg)
                               </label>
                               <FormInput
                                 id="feInputCity"
+                                type="hidden"
                                 placeholder="Input Jumlah Qurban"
                                 name="txt_jumlah_qurban"
                                 onChange={this.props.handleChange}
