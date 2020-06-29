@@ -34,6 +34,7 @@ class PenerimaQurban extends React.Component {
           alamat: "",
           jumlah_anggota: "",
           tahun: "",
+          no_kupon: "",
         }
       ],
 
@@ -195,19 +196,20 @@ class PenerimaQurban extends React.Component {
     const session_qurban = localStorage.getItem("session-qurban");
     const id_kelurahan = localStorage.getItem("id-kelurahan");
 
-    if(session_qurban === "kelurahan" && row.id_kelurahan == parseInt(id_kelurahan)){
-      const url = `${this.URL_KUPON}?kelurahan=${row.nama_kelurahan}&no_kk_penerima=${row.no_kk}&nama_penerima=${row.kepala_kk}`;
+    if(session_qurban === "kelurahan" && row.id_kelurahan === parseInt(id_kelurahan)){
+      const url = `${this.URL_KUPON}?no_kupon=${row.no_kupon}&kelurahan=${row.nama_kelurahan}&no_kk_penerima=${row.no_kk}&nama_penerima=${row.kepala_kk}`;
       return <td>
           <a href={url}
+            // eslint-disable-next-line react/jsx-no-target-blank
             target="_blank"
             title="Klik untuk mencetak Kupon"
           >
-            {row.no_kk}
+            {row.no_kupon}
           </a>
         </td>
     }
     
-    return <td>{row.no_kk}</td>
+    return <td>{row.no_kupon}</td>
   }
 
   actionData = (id=0, id_kel=0, tag='head') => {
@@ -291,6 +293,9 @@ class PenerimaQurban extends React.Component {
                       <th scope="col" className="border-0">
                         Jumlah Anggota
                       </th>
+                      <th scope="col" className="border-0">
+                        No Kupon
+                      </th>
                       {this.actionData()}
                     </tr>
                   </thead>
@@ -298,12 +303,13 @@ class PenerimaQurban extends React.Component {
                     {this.state.penerima_qurban.map((row, index) => (
                       <tr key={row.id}>
                         <td>{index + 1}</td>
-                        {this.kupon(row)}
+                        <td>{row.no_kk}</td>
                         <td>{row.kepala_kk}</td>
                         <td>{row.nama_kelurahan}</td>
                         <td>{row.tahun}</td>
                         <td>{row.alamat}</td>
                         <td>{row.jumlah_anggota}</td>
+                        {this.kupon(row)}
                         {this.actionData(row.id, row.id_kelurahan, 'body')}
                       </tr>
                     ))}

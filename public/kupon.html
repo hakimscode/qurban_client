@@ -12,6 +12,10 @@
                 <td colspan="2"><b>KUPON</b></td>
             </tr>
             <tr>
+                <td width="50%">No Kupon</td>
+                <td id="no_kupon"></td>
+            </tr>
+            <tr>
                 <td width="50%">Kelurahan</td>
                 <td id="kelurahan"></td>
             </tr>
@@ -47,6 +51,7 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
 
+        document.getElementById("no_kupon").innerHTML = urlParams.get('no_kupon');
         document.getElementById("kelurahan").innerHTML = urlParams.get('kelurahan');
         document.getElementById("no_kk_penerima").innerHTML = urlParams.get('no_kk_penerima');
         document.getElementById("nama_penerima").innerHTML = urlParams.get('nama_penerima');
