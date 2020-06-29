@@ -8,6 +8,7 @@ import { DefaultLayout } from "./layouts";
 import Dashboard from "./views/Dashboard";
 import PenerimaQurban from "./views/PenerimaQurban";
 import PemberiQurban from "./views/PemberiQurban";
+import PengambilanQurban from "./views/PengambilanQurban";
 import Kelurahan from "./views/Kelurahan";
 import UserKelurahan from "./views/UserKelurahan";
 import GantiPassword from "./views/GantiPassword";
@@ -34,6 +35,11 @@ export default [
     path: "/pemberi-qurban",
     layout: DefaultLayout,
     component: PemberiQurban
+  },
+  {
+    path: "/pengambilan-qurban",
+    layout: DefaultLayout,
+    component: PengambilanQurban
   },
   {
     path: "/kelurahan",

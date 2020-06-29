@@ -22,6 +22,11 @@ export default function() {
       to: "/pemberi-qurban"
     },
     {
+      title: "Pengambilan Qurban",
+      htmlBefore: '<i class="material-icons">data_usage</i>',
+      to: "/pengambilan-qurban"
+    },
+    {
       title: "Laporan",
       htmlBefore: '<i class="material-icons">library_books</i>',
       to: "/laporan"
