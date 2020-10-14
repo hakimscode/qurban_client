@@ -38,9 +38,9 @@ class LaporanPemberiQurban extends React.Component{
                             <th scope="col" className="border-0">
                                 Tahun
                             </th>
-                            <th scope="col" className="border-0">
+                            {/* <th scope="col" className="border-0">
                                 Jumlah Qurban (kg)
-                            </th>
+                            </th> */}
                             <th scope="col" className="border-0">
                                 Keterangan
                             </th>
@@ -55,7 +55,7 @@ class LaporanPemberiQurban extends React.Component{
                                 <td>{row.alamat}</td>
                                 <td>{row.nama_kelurahan}</td>
                                 <td>{row.tahun}</td>
-                                <td>{row.jumlah_qurban}</td>
+                                {/* <td>{row.jumlah_qurban}</td> */}
                                 <td>{row.keterangan}</td>
                             </tr>
                             ))}
